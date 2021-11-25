@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Survey implements java.io.Serializable {
@@ -118,22 +119,37 @@ public class Survey implements java.io.Serializable {
     }
 
     protected void tabulate(Survey[] surveys) {
-        HashMap<Question, ArrayList<String>> listCheck = new HashMap<>();
-        ArrayList<ArrayList<String>> allRes = new ArrayList<>();
-        for (Survey survey : surveys) {
-            for (Question question : survey.questionsList) {
-                allRes.add(question.res.responseList);
-                break;
+        HashMap<Question, ArrayList<ResponseCorrectAnswer>> listCheck = new HashMap<>();
+        for (int i = 0; i < surveys[0].questionsList.size(); i++) {
+            ArrayList<ResponseCorrectAnswer> allRes = new ArrayList<>();
+            for (Survey survey : surveys) {
+                allRes.add(survey.questionsList.get(i).res);
             }
+            listCheck.put(surveys[0].questionsList.get(i), allRes);
         }
         for (Question question : surveys[0].questionsList) {
-            System.out.println(question);
-            for (ArrayList<String> res : allRes) {
-                listCheck.put(question, res);
-                System.out.println(res);
+            ArrayList<ArrayList<String>> allResponses = new ArrayList<>();
+            for (ResponseCorrectAnswer x : listCheck.get(question)) {
+                allResponses.add(x.responseList);
+            }
+            System.out.println();
+            question.display();
+            countResponses(allResponses);
+        }
+    }
+
+    protected void countResponses(ArrayList<ArrayList<String>> allResponses) {
+        HashMap<ArrayList<String>, Integer> answerCount = new HashMap<>();
+        for (ArrayList<String> item : allResponses) {
+            if (answerCount.containsKey(item)) {
+                answerCount.put(item, answerCount.get(item) + 1);
+            } else {
+                answerCount.put(item, 1);
             }
         }
-
+        for (Map.Entry<ArrayList<String>, Integer> entry : answerCount.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
     }
 
 

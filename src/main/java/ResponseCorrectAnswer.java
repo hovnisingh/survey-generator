@@ -17,6 +17,12 @@ public class ResponseCorrectAnswer implements java.io.Serializable {
         responseList = res;
     }
 
+    public void display() {
+        for (String res : responseList) {
+            System.out.print(res);
+        }
+    }
+
 
     // Validates that T/F question response is either T or F
     public void validateTrueOrFalse() {

@@ -1,5 +1,5 @@
-MultipleChoice.java
- MultipleChoice
+User.java
+ User
 Matching.java
  Matching
 Essay.java
@@ -14,8 +14,8 @@ ShortAnswer.java
  ShortAnswer
 ResponseCorrectAnswer.java
  ResponseCorrectAnswer
-User.java
- User
+MultipleChoice.java
+ MultipleChoice
 Survey.java
  Survey
 Menu.java

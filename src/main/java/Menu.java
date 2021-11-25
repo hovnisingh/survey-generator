@@ -266,10 +266,8 @@ public class Menu extends Survey implements java.io.Serializable {
         String nameSurvey = scanner.nextLine();
         FilenameFilter filter = (f, name) -> name.startsWith(nameSurvey);
         String[] files2 = f2.list(filter);
-
         Survey[] listOfSurveys = new Survey[files2.length];
         for (String file : files2) {
-            System.out.println(file);
             Serialize ser = new Serialize();
             Survey survey = ser.deserializeFilledSurveys(file);
             listOfSurveys[num] = survey;
