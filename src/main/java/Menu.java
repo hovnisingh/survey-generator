@@ -183,8 +183,7 @@ public class Menu extends Survey implements java.io.Serializable {
                     }
                     break;
                 case 7:
-                    tabulate();
-
+                    tabulateSurvey();
                     break;
                 case 8:
                     menuOne();
@@ -253,13 +252,12 @@ public class Menu extends Survey implements java.io.Serializable {
     }
 
     public void modify(Test test) {
-
         test.modify();
-
     }
 
-    @Override
-    public void tabulate() {
+
+    public void tabulateSurvey() {
+        int num = 0;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the name of the survey you want to tabulate. Choose from the list below.");
         for (String file : files) {
@@ -268,9 +266,17 @@ public class Menu extends Survey implements java.io.Serializable {
         String nameSurvey = scanner.nextLine();
         FilenameFilter filter = (f, name) -> name.startsWith(nameSurvey);
         String[] files2 = f2.list(filter);
+
+        Survey[] listOfSurveys = new Survey[files2.length];
         for (String file : files2) {
             System.out.println(file);
+            Serialize ser = new Serialize();
+            Survey survey = ser.deserializeFilledSurveys(file);
+            listOfSurveys[num] = survey;
+            num++;
         }
+        //tabulate(listOfSurveys);
+
     }
 
 

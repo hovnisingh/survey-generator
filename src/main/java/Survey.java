@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Survey implements java.io.Serializable {
@@ -11,7 +12,6 @@ public class Survey implements java.io.Serializable {
 
     public Survey() {
     }
-
 
     /**
      * Displays Menu 2
@@ -117,7 +117,19 @@ public class Survey implements java.io.Serializable {
         }
     }
 
-    protected void tabulate() {
+    protected void tabulate(Survey[] surveys) {
+        HashMap<Question, ArrayList<ResponseCorrectAnswer>> listCheck = new HashMap<>();
+        ArrayList<ResponseCorrectAnswer> allRes = new ArrayList<>();
+        for (Survey survey : surveys) {
+            for (Question question : survey.questionsList) {
+                allRes.add(question.res);
+                break;
+            }
+        }
+        for (ResponseCorrectAnswer res : allRes) {
+            System.out.println(res);
+        }
     }
+
 
 }

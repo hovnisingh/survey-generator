@@ -224,31 +224,19 @@ public class Serialize implements java.io.Serializable {
         return test;
     }
 
-    public Survey deserializeFilledSurveys() {
+    public Survey deserializeFilledSurveys(String fileName) {
         Survey survey = null;
-        int number = 1;
-        System.out.println("Please select a file to load:");
-        if (files2.length == 0) {
-            System.out.println("No survey files found in current directory.");
-        } else {
-            for (String file : files2) {
-                System.out.println(number + ") " + file);
-                number++;
-            }
-            System.out.println("Enter the name of the survey you want to load:");
-            String surveyName = scanner.nextLine();
-            try (FileInputStream fis = new FileInputStream("./filledSurveys/" + surveyName + ".ser");
-                 ObjectInputStream ois = new ObjectInputStream(fis);) {
-                survey = (Survey) ois.readObject();
-            } catch (FileNotFoundException e) {
-                System.out.println("File not found");
-            } catch (IOException ioe) {
-                System.out.println("Error reading test");
-                ioe.printStackTrace();
-            } catch (ClassNotFoundException notFound) {
-                System.out.println("Error loading test");
-                notFound.printStackTrace();
-            }
+        try (FileInputStream fis = new FileInputStream("./filledSurveys/" + fileName);
+             ObjectInputStream ois = new ObjectInputStream(fis);) {
+            survey = (Survey) ois.readObject();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        } catch (IOException ioe) {
+            System.out.println("Error reading survey");
+            ioe.printStackTrace();
+        } catch (ClassNotFoundException notFound) {
+            System.out.println("Error loading survey");
+            notFound.printStackTrace();
         }
         return survey;
     }
