@@ -275,7 +275,7 @@ public class Menu extends Survey implements java.io.Serializable {
             listOfSurveys[num] = survey;
             num++;
         }
-        //tabulate(listOfSurveys);
+        tabulate(listOfSurveys);
 
     }
 

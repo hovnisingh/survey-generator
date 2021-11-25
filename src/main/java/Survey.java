@@ -118,17 +118,22 @@ public class Survey implements java.io.Serializable {
     }
 
     protected void tabulate(Survey[] surveys) {
-        HashMap<Question, ArrayList<ResponseCorrectAnswer>> listCheck = new HashMap<>();
-        ArrayList<ResponseCorrectAnswer> allRes = new ArrayList<>();
+        HashMap<Question, ArrayList<String>> listCheck = new HashMap<>();
+        ArrayList<ArrayList<String>> allRes = new ArrayList<>();
         for (Survey survey : surveys) {
             for (Question question : survey.questionsList) {
-                allRes.add(question.res);
+                allRes.add(question.res.responseList);
                 break;
             }
         }
-        for (ResponseCorrectAnswer res : allRes) {
-            System.out.println(res);
+        for (Question question : surveys[0].questionsList) {
+            System.out.println(question);
+            for (ArrayList<String> res : allRes) {
+                listCheck.put(question, res);
+                System.out.println(res);
+            }
         }
+
     }
 
 

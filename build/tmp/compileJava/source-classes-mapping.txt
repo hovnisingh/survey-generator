@@ -14,13 +14,13 @@ ShortAnswer.java
  ShortAnswer
 ResponseCorrectAnswer.java
  ResponseCorrectAnswer
-Survey.java
- Survey
-Test.java
- Test
 User.java
  User
+Survey.java
+ Survey
 Menu.java
  Menu
 Serialize.java
  Serialize
+Test.java
+ Test
