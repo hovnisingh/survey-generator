@@ -132,9 +132,15 @@ public class Survey implements java.io.Serializable {
             for (ResponseCorrectAnswer x : listCheck.get(question)) {
                 allResponses.add(x.responseList);
             }
-            System.out.println();
-            question.display();
-            countResponses(allResponses);
+            if (question instanceof TF || question instanceof ValidDate || question instanceof ShortAnswer) {
+                System.out.println();
+                question.display();
+                countResponses(allResponses);
+            } else {
+                System.out.println();
+                question.display();
+                countMultipleResponses(allResponses);
+            }
         }
     }
 
@@ -148,8 +154,25 @@ public class Survey implements java.io.Serializable {
             }
         }
         for (Map.Entry<ArrayList<String>, Integer> entry : answerCount.entrySet()) {
+            System.out.println(entry.getKey().get(0) + ": " + entry.getValue());
+        }
+    }
+
+    protected void countMultipleResponses(ArrayList<ArrayList<String>> allResponses) {
+        HashMap<String, Integer> answerCount = new HashMap<>();
+        for (ArrayList<String> item : allResponses) {
+            for (String check : item) {
+                if (answerCount.containsKey(check)) {
+                    answerCount.put(check, answerCount.get(check) + 1);
+                } else {
+                    answerCount.put(check, 1);
+                }
+            }
+        }
+        for (Map.Entry<String, Integer> entry : answerCount.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
+
     }
 
 

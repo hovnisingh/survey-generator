@@ -47,7 +47,7 @@ public class ResponseCorrectAnswer implements java.io.Serializable {
     // Validates that matching question responses is the same number as the number of options
     public void validateMatching(int num) {
         while (responseList.size() != num) {
-            System.out.println("Please enter a valid response: ");
+            System.out.println("Please enter at least " + num + " responses:");
             responseList.clear();
             takeMultipleResponses();
         }

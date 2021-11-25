@@ -38,12 +38,10 @@ public class Test extends Survey implements java.io.Serializable {
         double valueOfQuestion = 100.00 / questionsList.size();
         int numOfEssayQuestions = 0;
         for (Question question : questionsList) {
-            System.out.println(question.responses);
             if (!(question instanceof Essay) || (question instanceof ShortAnswer)) {
                 for (ResponseCorrectAnswer correctAnswer : correctAnswers) {
                     if (correctAnswer.compare(correctAnswer, question.res)) {
                         grade += valueOfQuestion;
-                        System.out.println(grade);
                     }
                 }
             } else {
@@ -57,6 +55,7 @@ public class Test extends Survey implements java.io.Serializable {
         } else {
             System.out.println("The test was worth 100 points.");
         }
+        System.out.println();
 
 
     }
