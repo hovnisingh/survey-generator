@@ -19,7 +19,7 @@ public class ResponseCorrectAnswer implements java.io.Serializable {
 
     public void display() {
         for (String res : responseList) {
-            System.out.print(res);
+            System.out.println(res);
         }
     }
 

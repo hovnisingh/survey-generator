@@ -35,7 +35,6 @@ public class Essay extends Question implements java.io.Serializable {
     @Override
     public void takeResponse() {
         responses = new ArrayList<>();
-        System.out.println("Please enter your response:");
         takeMultipleResponses(responses);
         res = new ResponseCorrectAnswer(responses);
 

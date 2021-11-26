@@ -84,6 +84,7 @@ public class Survey implements java.io.Serializable {
         for (Question value : questionsList) {
             System.out.print(number + ") ");
             value.display();
+            System.out.println("Please enter your response:");
             value.takeResponse();
             System.out.println();
             number++;
@@ -132,15 +133,33 @@ public class Survey implements java.io.Serializable {
             for (ResponseCorrectAnswer x : listCheck.get(question)) {
                 allResponses.add(x.responseList);
             }
-            if (question instanceof TF || question instanceof ValidDate || question instanceof ShortAnswer) {
+            if (question instanceof TF || question instanceof ValidDate || question instanceof ShortAnswer || question instanceof Matching) {
                 System.out.println();
                 question.display();
                 countResponses(allResponses);
-            } else {
+            } else if (question instanceof MultipleChoice) {
                 System.out.println();
                 question.display();
                 countMultipleResponses(allResponses);
+            } else {
+                System.out.println();
+                question.display();
+                displayAllEssay(allResponses);
             }
+        }
+    }
+
+    private void displayAllEssay(ArrayList<ArrayList<String>> allResponses) {
+        HashMap<ArrayList<String>, Integer> answerCount = new HashMap<>();
+        for (ArrayList<String> item : allResponses) {
+            if (answerCount.containsKey(item)) {
+                answerCount.put(item, answerCount.get(item) + 1);
+            } else {
+                answerCount.put(item, 1);
+            }
+        }
+        for (Map.Entry<ArrayList<String>, Integer> entry : answerCount.entrySet()) {
+            System.out.println(entry.getKey().get(0));
         }
     }
 
@@ -154,9 +173,10 @@ public class Survey implements java.io.Serializable {
             }
         }
         for (Map.Entry<ArrayList<String>, Integer> entry : answerCount.entrySet()) {
-            System.out.println(entry.getKey().get(0) + ": " + entry.getValue());
+            System.out.println(entry.getKey() + ": " + entry.getValue());
         }
     }
+
 
     protected void countMultipleResponses(ArrayList<ArrayList<String>> allResponses) {
         HashMap<String, Integer> answerCount = new HashMap<>();

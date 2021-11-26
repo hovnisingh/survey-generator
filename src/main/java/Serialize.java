@@ -200,15 +200,15 @@ public class Serialize implements java.io.Serializable {
         int number = 1;
         System.out.println("Please select a file to load:");
         if (files4.length == 0) {
-            System.out.println("No test files found in current directory.");
+            System.out.println("No filled test files found in current directory.");
         } else {
             for (String file : files4) {
                 System.out.println(number + ") " + file);
                 number++;
             }
-            System.out.println("Enter the name of the test you want to load:");
-            String surveyName = scanner.nextLine();
-            try (FileInputStream fis = new FileInputStream("./filledTests/" + surveyName + ".ser");
+            System.out.println("Enter the name of the filled test you want to load:");
+            String testName = scanner.nextLine();
+            try (FileInputStream fis = new FileInputStream("./filledTests/" + testName + ".ser");
                  ObjectInputStream ois = new ObjectInputStream(fis);) {
                 test = (Test) ois.readObject();
             } catch (FileNotFoundException e) {
@@ -239,6 +239,23 @@ public class Serialize implements java.io.Serializable {
             notFound.printStackTrace();
         }
         return survey;
+    }
+
+    public Test deserializeFilledTestsForTabulation(String fileName) {
+        Test test = null;
+        try (FileInputStream fis = new FileInputStream("./filledTests/" + fileName);
+             ObjectInputStream ois = new ObjectInputStream(fis);) {
+            test = (Test) ois.readObject();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        } catch (IOException ioe) {
+            System.out.println("Error reading survey");
+            ioe.printStackTrace();
+        } catch (ClassNotFoundException notFound) {
+            System.out.println("Error loading survey");
+            notFound.printStackTrace();
+        }
+        return test;
     }
 
 

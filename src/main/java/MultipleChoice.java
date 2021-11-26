@@ -78,7 +78,6 @@ public class MultipleChoice extends Question {
     @Override
     public void takeResponse() {
         responses = new ArrayList<>();
-        System.out.println("Please enter your response:");
         takeMultipleResponses(responses);
         res = new ResponseCorrectAnswer(responses);
         res.validateMC(numChoices);

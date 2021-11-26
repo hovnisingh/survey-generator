@@ -53,7 +53,6 @@ public class ShortAnswer extends Essay implements java.io.Serializable {
     @Override
     public void takeResponse() {
         responses = new ArrayList<>();
-        System.out.println("Please enter your response:");
         responses.add(scanner.nextLine());
         res = new ResponseCorrectAnswer(responses);
         res.validateShortAnswer(wordLimit);

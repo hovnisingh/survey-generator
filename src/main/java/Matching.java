@@ -105,7 +105,6 @@ public class Matching extends Question implements java.io.Serializable {
     @Override
     public void takeResponse() {
         responses = new ArrayList<>();
-        System.out.println("Please enter your response (Number followed by matching letter):");
         takeMultipleResponses(responses);
         res = new ResponseCorrectAnswer(responses);
         res.validateMatching(numChoices);

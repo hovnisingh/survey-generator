@@ -1,8 +1,10 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Test extends Survey implements java.io.Serializable {
 
     private static final long serialVersionUID = -1570645570118871214L;
+    private static final Scanner scanner = new Scanner(System.in);
     public ArrayList<ResponseCorrectAnswer> correctAnswers = new ArrayList<>();
     public String testName;
 
@@ -15,9 +17,23 @@ public class Test extends Survey implements java.io.Serializable {
         for (Question value : questionsList) {
             System.out.print(number + ") ");
             value.display();
-            System.out.println("Correct answer:" + correctAnswers.get(number - 1).responseList);
+            System.out.println("Correct answer(s):");
+            correctAnswers.get(number - 1).display();
             System.out.println();
             number++;
+        }
+    }
+
+    public void modifyTest() {
+        System.out.println("What question do you wish to modify?");
+        int chosenQuestion = Integer.parseInt(scanner.nextLine()) - 1;
+        questionsList.get(chosenQuestion).modify();
+        System.out.println("Do you wish to modify the correct answer for this question?");
+        if (scanner.nextLine().equals("Yes")) {
+            questionsList.get(chosenQuestion).res.display();
+            System.out.println("Enter new correct answer:");
+            questionsList.get(chosenQuestion).takeResponse();
+            correctAnswers.set(chosenQuestion, questionsList.get(chosenQuestion).res);
         }
     }
 
