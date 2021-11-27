@@ -43,6 +43,10 @@ public class Serialize implements java.io.Serializable {
         }
     }
 
+    /**
+     * Takes in a Test and saves object to .ser file
+     * Validates name of test is not empty
+     */
     public void serialize(Test test) {
         System.out.println("Enter a name for your test:");
         test.testName = scanner.nextLine();
@@ -85,6 +89,7 @@ public class Serialize implements java.io.Serializable {
         }
     }
 
+    // Takes in a Filled Test and saves test to .ser file in filledTests directory
     public void serializeFilledTests(Test test) {
         System.out.println("Enter the number of times this test has been taken:");
         String num = scanner.nextLine();
@@ -132,11 +137,6 @@ public class Serialize implements java.io.Serializable {
      * Checks if file inputted is in directory
      * Returns Survey loaded
      */
-
-    public void deserialize(String path) {
-
-    }
-
     public Survey deserializeSurvey() {
         Survey survey = null;
         int number = 1;
@@ -166,6 +166,12 @@ public class Serialize implements java.io.Serializable {
         return survey;
     }
 
+    /**
+     * Loads .ser file to Test object
+     * Outputs list of all .ser files in tests directory
+     * Checks if file inputted is in directory
+     * Returns Test loaded
+     */
     public Test deserializeTest() {
         Test test = null;
         int number = 1;
@@ -195,6 +201,12 @@ public class Serialize implements java.io.Serializable {
         return test;
     }
 
+    /**
+     * Loads .ser file to Test object
+     * Outputs list of all .ser files in filledTests directory
+     * Checks if file inputted is in directory
+     * Returns Test loaded
+     */
     public Test deserializeFilledTest() {
         Test test = null;
         int number = 1;
@@ -224,6 +236,12 @@ public class Serialize implements java.io.Serializable {
         return test;
     }
 
+    /**
+     * Loads .ser file to Test object
+     * Outputs list of all .ser files in filledTests directory
+     * Checks if file inputted is in directory
+     * Returns Test loaded
+     */
     public Survey deserializeFilledSurveys(String fileName) {
         Survey survey = null;
         try (FileInputStream fis = new FileInputStream("./filledSurveys/" + fileName);
@@ -241,6 +259,10 @@ public class Serialize implements java.io.Serializable {
         return survey;
     }
 
+    /**
+     * Gets  filled test file based on user inputted test name
+     * Returns Test loaded
+     */
     public Test deserializeFilledTestsForTabulation(String fileName) {
         Test test = null;
         try (FileInputStream fis = new FileInputStream("./filledTests/" + fileName);
@@ -249,10 +271,10 @@ public class Serialize implements java.io.Serializable {
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         } catch (IOException ioe) {
-            System.out.println("Error reading survey");
+            System.out.println("Error reading test");
             ioe.printStackTrace();
         } catch (ClassNotFoundException notFound) {
-            System.out.println("Error loading survey");
+            System.out.println("Error loading test");
             notFound.printStackTrace();
         }
         return test;

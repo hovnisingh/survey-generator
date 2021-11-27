@@ -12,6 +12,7 @@ public class Test extends Survey implements java.io.Serializable {
     public Test() {
     }
 
+    // Displays a Test with its correct answers
     public void displayWithAnswers() {
         int number = 1;
         for (Question value : questionsList) {
@@ -24,6 +25,10 @@ public class Test extends Survey implements java.io.Serializable {
         }
     }
 
+    /**
+     * Allows a user to modify a question of their choice from a Test
+     * User can modify a question's prompt, choices, or the correct answers
+     */
     public void modifyTest() {
         System.out.println("What question do you wish to modify?");
         int chosenQuestion = Integer.parseInt(scanner.nextLine()) - 1;
@@ -37,7 +42,7 @@ public class Test extends Survey implements java.io.Serializable {
         }
     }
 
-
+    // Allows user to set the correct answers for each question in a test
     public void setAnswers() {
         for (Question value : questionsList) {
             value.display();
@@ -48,6 +53,12 @@ public class Test extends Survey implements java.io.Serializable {
     }
 
 
+    /**
+     * Gets value of each question based on number of total questions
+     * Compares the responses for each question and adds value of question to total grade if
+     * user responses for the question and correct responses for the question are the same
+     * Does not grade essay questions
+     */
     public void grade() {
         double grade = 0.00;
 

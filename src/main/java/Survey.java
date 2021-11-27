@@ -15,10 +15,10 @@ public class Survey implements java.io.Serializable {
     }
 
     /**
-     * Displays Menu 2
-     * User can add 6 types of questions to a survey:
+     * Displays Menu 3
+     * User can add 6 types of questions to a survey or test:
      * T/F, Multiple Choice, Short Answer, Essay, Date, and Matching
-     * Or they can return to Menu 1
+     * Or they can return to Menu 2
      */
     public void surveyMenu() {
         boolean menuTwo = true;
@@ -119,6 +119,11 @@ public class Survey implements java.io.Serializable {
         }
     }
 
+    /**
+     * Takes in a list of filled out surveys
+     * Maps all responses given in the surveys to their respective question
+     * Counts frequency of each response for a given question (tabulation)
+     */
     protected void tabulate(Survey[] surveys) {
         HashMap<Question, ArrayList<ResponseCorrectAnswer>> listCheck = new HashMap<>();
         for (int i = 0; i < surveys[0].questionsList.size(); i++) {
@@ -149,6 +154,7 @@ public class Survey implements java.io.Serializable {
         }
     }
 
+    // Outputs all responses to an essay question
     private void displayAllEssay(ArrayList<ArrayList<String>> allResponses) {
         HashMap<ArrayList<String>, Integer> answerCount = new HashMap<>();
         for (ArrayList<String> item : allResponses) {
@@ -163,6 +169,7 @@ public class Survey implements java.io.Serializable {
         }
     }
 
+    // Outputs each response and frequency of that response
     protected void countResponses(ArrayList<ArrayList<String>> allResponses) {
         HashMap<ArrayList<String>, Integer> answerCount = new HashMap<>();
         for (ArrayList<String> item : allResponses) {
@@ -177,7 +184,7 @@ public class Survey implements java.io.Serializable {
         }
     }
 
-
+    // Outputs each response to a Multiple Choice question and frequency of that response
     protected void countMultipleResponses(ArrayList<ArrayList<String>> allResponses) {
         HashMap<String, Integer> answerCount = new HashMap<>();
         for (ArrayList<String> item : allResponses) {

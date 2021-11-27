@@ -22,6 +22,11 @@ public class Menu extends Survey implements java.io.Serializable {
     public Menu() {
     }
 
+    /**
+     * Displays Menu 1
+     * User can go to the Survey Menu, Test Menu,
+     * or exit the program
+     */
     public void menuOne() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -52,6 +57,13 @@ public class Menu extends Survey implements java.io.Serializable {
             }
         }
     }
+
+    /**
+     * Displays Test Menu 2
+     * User can create a test, display a loaded test with or without answers,
+     * save the current test, load a test, take a loaded test, modify a test,
+     * tabulate a test, or grade a test
+     */
 
     private void displayTestMenu() {
         Scanner scanner = new Scanner(System.in);
@@ -132,7 +144,7 @@ public class Menu extends Survey implements java.io.Serializable {
 
 
     /**
-     * Displays Menu 1
+     * Displays Survey Menu 2
      * User can create a survey, display a loaded survey,
      * save the current survey, load a survey, take a loaded survey, or
      * modify a loaded survey
@@ -222,15 +234,14 @@ public class Menu extends Survey implements java.io.Serializable {
         loadedTest = ser.deserializeTest();
     }
 
+    // Asks user which test they want graded and loads a filled out test to grade
     public void gradeTest() {
         Serialize ser = new Serialize();
         loadedTest = ser.deserializeFilledTest();
         if (loadedTest != null) {
             loadedTest.grade();
         }
-
     }
-
 
     public void save(Survey survey) {
         survey.display();
@@ -256,6 +267,11 @@ public class Menu extends Survey implements java.io.Serializable {
         ser.serializeFilledTests(test);
     }
 
+    /**
+     * Tabulates a Test
+     * Gets all filled out tests based on which test user wants to tabulate
+     * Calls tabulate() if there are responses for a specific test
+     */
     public void tabulateTest() {
         int num = 0;
         Scanner scanner = new Scanner(System.in);
@@ -285,6 +301,11 @@ public class Menu extends Survey implements java.io.Serializable {
     }
 
 
+    /**
+     * Tabulates a Survey
+     * Gets all filled out surveys based on which survey user wants to tabulate
+     * Calls tabulate() if there are responses for a specific survey
+     */
     public void tabulateSurvey() {
         int num = 0;
         Scanner scanner = new Scanner(System.in);

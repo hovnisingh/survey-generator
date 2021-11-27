@@ -17,12 +17,12 @@ public class ResponseCorrectAnswer implements java.io.Serializable {
         responseList = res;
     }
 
+    // Displays each response in ArrayList of responses
     public void display() {
         for (String res : responseList) {
             System.out.println(res);
         }
     }
-
 
     // Validates that T/F question response is either T or F
     public void validateTrueOrFalse() {
@@ -132,6 +132,12 @@ public class ResponseCorrectAnswer implements java.io.Serializable {
         }
     }
 
+    /**
+     * Takes in an ArrayList of correct responses and an ArrayList of user responses for a question
+     * Returns false if size of correct responses and size of user responses are not equal
+     * Check if the correct responses contains each response in the user responses, returns false if not
+     * Returns true if user responses for a question is the same as the correct answers
+     */
     public boolean compare(ResponseCorrectAnswer correct, ResponseCorrectAnswer user) {
         boolean check = false;
         if (correct.responseList.size() != user.responseList.size()) {
