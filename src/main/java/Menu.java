@@ -1,18 +1,7 @@
-import java.io.File;
-import java.io.FilenameFilter;
 import java.util.Scanner;
 
 public class Menu extends Survey implements java.io.Serializable {
     private static final long serialVersionUID = 4331762040471431012L;
-    private final File f3 = new File("tests");
-    private final File f4 = new File("filledTests");
-    private final FilenameFilter filter3 = (f3, name) -> name.endsWith(".ser");
-    private final String[] files2 = f3.list(filter3);
-    File f = new File("surveys");
-    File f2 = new File("filledSurveys");
-    FilenameFilter filter = (f, name) -> name.endsWith(".ser");
-
-    String[] files = f.list(filter);
     private Survey loadedSurvey;
     private Survey survey;
     private Test test;
