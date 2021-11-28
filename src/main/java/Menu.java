@@ -274,6 +274,7 @@ public class Menu extends Survey implements java.io.Serializable {
      */
     public void tabulateTest() {
         int num = 0;
+        Serialize ser = new Serialize();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the name of the test you want to tabulate. Choose from the list below.");
         for (String file : files2) {
@@ -285,7 +286,6 @@ public class Menu extends Survey implements java.io.Serializable {
         if ((files3.length != 0) && (Arrays.asList(files2).contains(nameTest + ".ser"))) {
             Test[] listOfTests = new Test[files3.length];
             for (String file : files3) {
-                Serialize ser = new Serialize();
                 Test test = ser.deserializeFilledTestsForTabulation(file);
                 listOfTests[num] = test;
                 num++;
@@ -308,6 +308,7 @@ public class Menu extends Survey implements java.io.Serializable {
      */
     public void tabulateSurvey() {
         int num = 0;
+        Serialize ser = new Serialize();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the name of the survey you want to tabulate. Choose from the list below.");
         for (String file : files) {
@@ -319,7 +320,6 @@ public class Menu extends Survey implements java.io.Serializable {
         if ((files2.length != 0) && (Arrays.asList(files).contains(nameSurvey + ".ser"))) {
             Survey[] listOfSurveys = new Survey[files2.length];
             for (String file : files2) {
-                Serialize ser = new Serialize();
                 Survey survey = ser.deserializeFilledSurveys(file);
                 listOfSurveys[num] = survey;
                 num++;
