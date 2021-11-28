@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -278,6 +279,56 @@ public class Serialize implements java.io.Serializable {
             notFound.printStackTrace();
         }
         return test;
+    }
+
+    public Survey[] getListOfSurveysForTabulation() {
+        int num = 0;
+        System.out.println("Enter the name of the survey you want to tabulate. Choose from the list below.");
+        for (String file : files) {
+            System.out.println(file);
+        }
+        String nameSurvey = scanner.nextLine();
+        FilenameFilter filter = (f, name) -> name.startsWith(nameSurvey);
+        String[] files2 = f2.list(filter);
+        if ((files2.length != 0) && (Arrays.asList(files).contains(nameSurvey + ".ser"))) {
+            Survey[] listOfSurveys = new Survey[files2.length];
+            for (String file : files2) {
+                Survey survey = deserializeFilledSurveys(file);
+                listOfSurveys[num] = survey;
+                num++;
+            }
+            return listOfSurveys;
+        } else if ((Arrays.asList(files).contains(nameSurvey + ".ser")) && (files2.length == 0)) {
+            System.out.println("There are no responses for this survey.");
+        } else {
+            System.out.println("File not found.");
+        }
+        return null;
+    }
+
+    public Test[] getListOfTestsForTabulation() {
+        int num = 0;
+        System.out.println("Enter the name of the test you want to tabulate. Choose from the list below.");
+        for (String file : files3) {
+            System.out.println(file);
+        }
+        String nameTest = scanner.nextLine();
+        FilenameFilter filter = (f, name) -> name.startsWith(nameTest);
+        String[] files3 = f4.list(filter);
+        if ((files3.length != 0) && (Arrays.asList(files3).contains(nameTest + ".ser"))) {
+            Test[] listOfTests = new Test[files3.length];
+            for (String file : files3) {
+                Test test = deserializeFilledTestsForTabulation(file);
+                listOfTests[num] = test;
+                num++;
+            }
+            return listOfTests;
+        } else if ((Arrays.asList(files3).contains(nameTest + ".ser")) && (files3.length == 0)) {
+            System.out.println("There are no responses for this survey.");
+        } else {
+            System.out.println("File not found.");
+        }
+        return null;
     }
 
 

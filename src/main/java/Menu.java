@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FilenameFilter;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Menu extends Survey implements java.io.Serializable {
@@ -12,6 +11,7 @@ public class Menu extends Survey implements java.io.Serializable {
     File f = new File("surveys");
     File f2 = new File("filledSurveys");
     FilenameFilter filter = (f, name) -> name.endsWith(".ser");
+
     String[] files = f.list(filter);
     private Survey loadedSurvey;
     private Survey survey;
@@ -273,31 +273,12 @@ public class Menu extends Survey implements java.io.Serializable {
      * Calls tabulate() if there are responses for a specific test
      */
     public void tabulateTest() {
-        int num = 0;
         Serialize ser = new Serialize();
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the name of the test you want to tabulate. Choose from the list below.");
-        for (String file : files2) {
-            System.out.println(file);
-        }
-        String nameTest = scanner.nextLine();
-        FilenameFilter filter = (f, name) -> name.startsWith(nameTest);
-        String[] files3 = f4.list(filter);
-        if ((files3.length != 0) && (Arrays.asList(files2).contains(nameTest + ".ser"))) {
-            Test[] listOfTests = new Test[files3.length];
-            for (String file : files3) {
-                Test test = ser.deserializeFilledTestsForTabulation(file);
-                listOfTests[num] = test;
-                num++;
-            }
+        Test[] listOfTests;
+        listOfTests = ser.getListOfTestsForTabulation();
+        if (listOfTests != null) {
             tabulate(listOfTests);
-        } else if ((Arrays.asList(files2).contains(nameTest + ".ser")) && (files3.length == 0)) {
-            System.out.println("There are no responses for this survey.");
-        } else {
-            System.out.println("File not found.");
         }
-
-
     }
 
 
@@ -307,32 +288,11 @@ public class Menu extends Survey implements java.io.Serializable {
      * Calls tabulate() if there are responses for a specific survey
      */
     public void tabulateSurvey() {
-        int num = 0;
         Serialize ser = new Serialize();
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the name of the survey you want to tabulate. Choose from the list below.");
-        for (String file : files) {
-            System.out.println(file);
-        }
-        String nameSurvey = scanner.nextLine();
-        FilenameFilter filter = (f, name) -> name.startsWith(nameSurvey);
-        String[] files2 = f2.list(filter);
-        if ((files2.length != 0) && (Arrays.asList(files).contains(nameSurvey + ".ser"))) {
-            Survey[] listOfSurveys = new Survey[files2.length];
-            for (String file : files2) {
-                Survey survey = ser.deserializeFilledSurveys(file);
-                listOfSurveys[num] = survey;
-                num++;
-            }
+        Survey[] listOfSurveys;
+        listOfSurveys = ser.getListOfSurveysForTabulation();
+        if (listOfSurveys != null) {
             tabulate(listOfSurveys);
-        } else if ((Arrays.asList(files).contains(nameSurvey + ".ser")) && (files2.length == 0)) {
-            System.out.println("There are no responses for this survey.");
-        } else {
-            System.out.println("File not found.");
         }
-
-
     }
-
-
 }

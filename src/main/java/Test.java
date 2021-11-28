@@ -83,7 +83,5 @@ public class Test extends Survey implements java.io.Serializable {
             System.out.println("The test was worth 100 points.");
         }
         System.out.println();
-
-
     }
 }
