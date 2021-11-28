@@ -281,6 +281,8 @@ public class Serialize implements java.io.Serializable {
         return test;
     }
 
+
+    // Get serialized list of survey responses for tabulation
     public Survey[] getListOfSurveysForTabulation() {
         int num = 0;
         System.out.println("Enter the name of the survey you want to tabulate. Choose from the list below.");
@@ -306,6 +308,7 @@ public class Serialize implements java.io.Serializable {
         return null;
     }
 
+    // Get serialized list of test responses for tabulation
     public Test[] getListOfTestsForTabulation() {
         int num = 0;
         System.out.println("Enter the name of the test you want to tabulate. Choose from the list below.");
