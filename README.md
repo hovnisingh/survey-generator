@@ -1,7 +1,3 @@
-Hovni Singh
-SE 310 - 002
-Homework 2 Part D
-Survey Generator
 
 - Users are able to create, display, save, load, modify, and take a Survey or a Test
 - Tests can be graded, each test worth 100 points total
